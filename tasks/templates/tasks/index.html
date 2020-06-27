@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{ form.title }}
+    <input type="submit" value="Add item">
+</form>
+
+<!-- Display all items  -->
+{% for item in items %}
+<div>
+    <a href="{% url 'update_page' item.id %} ">Update </a>
+    <a href="{% url 'delete_page' item.id %} ">Delete </a>
+    
+    {% if item.complete == True %}
+    <strike>{{ item }}</strike>
+    {% else %}
+    <span>{{ item }}</span>
+    {% endif %}
+    
+</div>
+{% endfor %}
+
+{% endblock content %}
